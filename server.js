@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/api', cache('60 minutes'), async (req, res) => {
 	// since data changes per 24hrs, cache the initially received to save on resources
 	// will also make the website fast
-	const country_code = req.body;
+	const country_code = 'KE'; //req.body;
 	console.log(country_code);
 	try {
 		const myApi = await needle(
