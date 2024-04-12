@@ -34,11 +34,13 @@ Just append ?country_code=(shortcode e.g KE for Kenya) after the URL
 1. Data from API was hard to sort
 2. Search query not passing to backend from frontend
 3. API can't be fetched using Node>v.20
+4. Limited API, can't use POST, PUT, DELETE
 
 # Future fixes:
 
 1. Better the frontend
 2. Able to see developers GitHub
+3. Pagination
 
 # Usage:
 
