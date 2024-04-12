@@ -22,8 +22,9 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/api', async (req, res) => {
-	//cache('30 minutes')
+app.get('/api', cache('60 minutes'), async (req, res) => {
+	// since data changes per 24hrs, cache the initially received to save on resources
+	// will also make the website fast
 	const country_code = req.body;
 	console.log(country_code);
 	try {
