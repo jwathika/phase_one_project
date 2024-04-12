@@ -1,6 +1,7 @@
 const myApi = fetch('/api');
 const table = document.getElementById('myTable');
-
+const countryForm = document.getElementById('searchForm');
+const countryInput = document.getElementById('');
 window.onload = () => {
 	myApi
 		.then((res) => res.json())
@@ -32,6 +33,18 @@ window.onload = () => {
 					<td>${languages}</td>
 				</tr>`;
 					table.innerHTML += row;
+				});
+			});
+			countryForm.addEventListener('submit', (event) => {
+				event.preventDefault();
+				const query = countryInput.value;
+				console.log(query);
+				fetch(`${myApi}`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ country_code: query }),
 				});
 			});
 		})

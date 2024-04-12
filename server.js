@@ -22,10 +22,13 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/api', cache('30 minutes'), async (req, res) => {
+app.get('/api', async (req, res) => {
+	//cache('30 minutes')
+	const country_code = req.body;
+	console.log(country_code);
 	try {
 		const myApi = await needle(
-			'https://wakatime.com/api/v1/leaders?country_code=KE'
+			`https://wakatime.com/api/v1/leaders?country_code=${country_code}`
 		);
 		if (myApi.statusCode !== 200) {
 			throw new Error(`Error`);
