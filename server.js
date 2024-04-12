@@ -24,7 +24,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api', cache('30 minutes'), async (req, res) => {
 	try {
-		const myApi = await needle('https://wakatime.com/api/v1/leaders');
+		const myApi = await needle(
+			'https://wakatime.com/api/v1/leaders?country_code=KE'
+		);
 		if (myApi.statusCode !== 200) {
 			throw new Error(`Error`);
 		}
