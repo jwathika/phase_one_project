@@ -8,6 +8,14 @@ body {
 	background-color: #333;
 	overflow: hidden;
 }
+
+#countryForm {
+	left: 199%;
+}
+#nextPageBtn {
+	position: absolute;
+	left: 80%;
+}
 .navbar a {
 	float: left;
 	display: block;
