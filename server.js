@@ -6,6 +6,7 @@ require('dotenv').config();
 const express = require('express');
 const needle = require('needle');
 const cors = require('cors');
+const url = require('url');
 /*instead of making a new request each time to the 
 api, you can cache the previous response not to overload server
 */
@@ -22,14 +23,18 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/api', async (req, res) => {
+app.get('/api', cache('10 minutes'), async (req, res) => {
 	//cache('30 minutes')
-	const country_code = req.body;
-	console.log(country_code);
+	// const parsedurl = url.parse(req.url, true);
+	const country_code = JSON.stringify(req.url);
+	let trimedcode = country_code.split('=')[1];
+	console.log(trimedcode);
+	const apime = 'https://wakatime.com/api/v1/leaders';
+
+	console.log(`${apime}?country_code=${trimedcode}`);
 	try {
-		const myApi = await needle(
-			`https://wakatime.com/api/v1/leaders?country_code=${country_code}`
-		);
+		const myApi = await needle('get', `${apime}?${country_code}`);
+
 		if (myApi.statusCode !== 200) {
 			throw new Error(`Error`);
 		}
